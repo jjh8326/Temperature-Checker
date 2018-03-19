@@ -10,13 +10,6 @@ new Vue({
     showFahrenheit: false,
     temperature: ''
   },
-  /* this code wont work because it happens on load
-  mounted() {
-    axios.get(this.getURL).then(response => {
-      this.results = response.data
-    })
-  },
-  */
   methods: {
     getApiData: function() {
       axios.get(this.getURL).then(response => {
@@ -25,11 +18,9 @@ new Vue({
         this.parseBasicWeather();
       }).catch(function (error) {
         alert('Please enter a valid zip code');
-        //console.log(error);
       });
     },
     parseBasicWeather: function() {
-      //alert('parse basic called');
       if (this.results.main.temp > 0) {
         this.temperature = this.results.main.temp;
         this.displayedData = this.temperature;
@@ -54,6 +45,3 @@ new Vue({
     }
   }
 });
-
-//Working API Link
-//http://api.openweathermap.org/data/2.5/weather?zip=20815&APPID=6715cddd7921ba500b0af9cd1f5a4b27
