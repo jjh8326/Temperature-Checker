@@ -27,11 +27,14 @@ new Vue({
       }
       if (this.results.name.length > 0) {
         this.locationName = this.results.name;
+      } else {
+        this.locationName = this.zip;
       }
     },
     reset: function() {
       this.valid = false;
       this.zip = '';
+      this.locationName = '';
       this.showFahrenheit = false;
       this.showCelsius = false;
     }
