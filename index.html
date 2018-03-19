@@ -2,24 +2,24 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Weather Demo</title>
+    <title>Temperature Demo</title>
     <link href="styles.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.15/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <div id="mainContent">
-      <h1>Enter zip code to find the temperature!</h1>
-      Zip Code: <input type="text" v-model="zip" v-on:keyup.enter='getApiData()'/>
-      <button v-on:click='getApiData()'>Go</button><button v-on:click='reset()'>Reset</button>
-      <br /><br />
+      <p>
+        <h2>Enter a US zip code to find the temperature <div v-show="valid">(in Kelvin)</div></h2>
+        Zip Code: <input type="text" v-model="zip" v-on:keyup.enter='getApiData()'/>
+        <button v-on:click='getApiData()'>Go</button><button v-on:click='reset()'>Reset</button>
+      </p>
       <div v-show="valid" id="weatherInfo">
-        <p>Temperature in Kelvin: {{ displayedData }}</p>
-        <p v-show="showCelsius">Temperature in Celsius: {{ getTemperatureInCelsius }}</p>
-        <p v-show="showFahrenheit">Temperature in Fahrenheit: {{ getTemperatureInFahrenheit }}</p>
-        <br />
-        <button v-on:click='showCelsius = !showCelsius' v-show="!showCelsius">Convert to Celsius</button>
+        <p>{{ getFormattedLocationStringWithUSTemperature }}&deg K</p>
+        <p v-show="showFahrenheit">{{ getTemperatureInFahrenheit }}&deg F</p>
+        <p v-show="showCelsius">{{ getTemperatureInCelsius }}&deg C</p>
         <button v-on:click='showFahrenheit = !showFahrenheit' v-show="!showFahrenheit">Convert to Fahrenheit</button>
+        <button v-on:click='showCelsius = !showCelsius' v-show="!showCelsius">Convert to Celsius</button>
       </div>
     </div>
   <script src="app.js"></script>

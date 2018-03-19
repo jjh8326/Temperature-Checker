@@ -5,6 +5,7 @@ new Vue({
     results: [],
     displayedData: '',
     zip: '',
+    locationName: '',
     valid: false,
     showCelsius: false,
     showFahrenheit: false,
@@ -17,13 +18,15 @@ new Vue({
         this.valid = true;
         this.parseBasicWeather();
       }).catch(function (error) {
-        alert('Please enter a valid zip code');
+        alert('Please enter a valid US zip code');
       });
     },
     parseBasicWeather: function() {
       if (this.results.main.temp > 0) {
-        this.temperature = this.results.main.temp;
-        this.displayedData = this.temperature;
+        this.temperature = this.results.main.temp.toFixed(1);
+      }
+      if (this.results.name.length > 0) {
+        this.locationName = this.results.name;
       }
     },
     reset: function() {
@@ -37,11 +40,14 @@ new Vue({
     getURL: function() {
       return this.apiURL + '?zip=' + this.zip + '&APPID=6715cddd7921ba500b0af9cd1f5a4b27';
     },
+    getFormattedLocationStringWithUSTemperature: function() {
+      return 'The temperature in ' + this.locationName + ' is ' + this.temperature;
+    },
     getTemperatureInCelsius: function() {
-      return this.temperature - 273.15;
+      return (this.temperature - 273.15).toFixed(1);
     },
     getTemperatureInFahrenheit: function() {
-      return 9/5 * (this.temperature - 273 ) + 32;
+      return (9/5 * (this.temperature - 273 ) + 32).toFixed(1);
     }
   }
 });
