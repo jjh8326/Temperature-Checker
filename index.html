@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Weather Demo</title>
+    <link href="styles.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.15/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="mainContent">
+      <h1>Enter zip code to find the temperature!</h1>
+      Zip Code: <input type="text" v-model="zip" v-on:keyup.enter='getApiData()'/>
+      <button v-on:click='getApiData()'>Go</button><button v-on:click='reset()'>Reset</button>
+      <!--make it so we can hit enter or click enter-->
+      <br /><br />
+      <div v-show="valid" id="weatherInfo">
+        <p>Temperature in Kelvin: {{ displayedData }}</p>
+        <p v-show="showCelsius">Temperature in Celsius: {{ getTemperatureInCelsius }}</p>
+        <p v-show="showFahrenheit">Temperature in Fahrenheit: {{ getTemperatureInFahrenheit }}</p>
+        <br />
+        <button v-on:click='showCelsius = !showCelsius' v-show="!showCelsius">Convert to Celsius</button>
+        <button v-on:click='showFahrenheit = !showFahrenheit' v-show="!showFahrenheit">Convert to Fahrenheit</button>
+      </div>
+      <!--{{ results }} <br />
+      {{ zip }} <br />
+      <br />
+      {{ results.weather }}
+      <br />
+      Generated URL: {{ getURL }} <br />
+      Valid URL: http://api.openweathermap.org/data/2.5/weather?zip=20815&APPID=6715cddd7921ba500b0af9cd1f5a4b27 <br />-->
+    </div>
+  <script src="app.js"></script>
+  </body>
+</html>
